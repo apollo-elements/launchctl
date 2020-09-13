@@ -8,6 +8,7 @@
     "build": "run-s build:*",
     "build:codegen": "graphql-codegen",
     "build:rollup": "rollup -c",
+    "postbuild": "echo \"/*    /index.html   200\" > build/_redirects",
     "clean": "rimraf build",
     "deploy": "echo No Deploy Script Yet",
     "lint": "run-s lint:*",
