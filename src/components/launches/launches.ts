@@ -1,7 +1,9 @@
-import { ApolloQuery, customElement, html, TemplateResult } from '@apollo-elements/lit-apollo';
+import { ApolloQuery, customElement, html, query, TemplateResult } from '@apollo-elements/lit-apollo';
 import { classMap } from 'lit-html/directives/class-map';
 
 import { TypePoliciesMixin } from '@apollo-elements/mixins/type-policies-mixin';
+
+import ResizeObserver from 'resize-observer-polyfill';
 
 import type {
   LaunchesQueryData as Data,
@@ -32,6 +34,21 @@ export class SpacexLaunches extends TypePoliciesMixin(ApolloQuery)<Data, Variabl
         },
       },
     },
+  }
+
+  @query('table') table: HTMLTableElement;
+
+  private ro: ResizeObserver;
+
+  constructor() {
+    super();
+    this.ro = new ResizeObserver(this.onResize.bind(this));
+    this.ro.observe(this);
+  }
+
+  onResize(entries: ResizeObserverEntry[]): void {
+    const [{ contentRect: { width } }] = entries;
+    this.table.style.setProperty('--data-table-link-width', `${width}px`);
   }
 
   render(): TemplateResult {

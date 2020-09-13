@@ -57,6 +57,7 @@
     "@apollo-elements/lit-apollo": "^3.0.0-alpha.8",
     "@appnest/masonry-layout": "^2.0.8",
     "pwa-helpers": "^0.9.1",
+    "resize-observer-polyfill": "^1.5.1",
     "rollup-plugin-lit-css": "^2.0.4",
     "tslib": "^2.0.1",
     "youtube-video-element": "0.0.5"

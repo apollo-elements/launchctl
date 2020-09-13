@@ -4,6 +4,10 @@
   width: calc(100% - 64px);
 }
 
+* {
+  position: relative;
+}
+
 table {
   table-layout: fixed;
   border-collapse: collapse;
@@ -40,7 +44,7 @@ td a[href]::after {
   top: 0;
   bottom: 0;
   left: 0;
-  width: var(--nnrg-table-link-width, 100%);
+  width: var(--data-table-link-width, 100%);
   height: 100%;
   z-index: 1;
 }

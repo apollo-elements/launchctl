@@ -8,7 +8,7 @@ import { client } from './client';
 import './components/app';
 import './components/latest-launch';
 import './components/next-launch';
-import './components/upcoming-launches';
+import './components/launches';
 
 window.__APOLLO_CLIENT__ =
   client;
