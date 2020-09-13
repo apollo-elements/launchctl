@@ -1,0 +1,30 @@
+:host {
+  height: 100%;
+  display: grid;
+  gap: 16px;
+  grid-template-rows: min-content min-content;
+  place-items: center;
+  justify-content: center;
+}
+
+article {
+  max-width: 800px;
+}
+
+youtube-video {
+  place-self: center;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+}
+
+masonry-layout {
+  width: calc(100% - 20px);
+  margin: 10px;
+}
+
+article a {
+  display: block;
+}

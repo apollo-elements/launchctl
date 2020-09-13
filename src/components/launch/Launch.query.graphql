@@ -1,0 +1,26 @@
+query LaunchQuery($launchId: ID!) {
+  route @client { params { launchId @export(as: "launchId" ) } }
+
+  launch(id: $launchId) {
+    details
+    id
+    launch_date_local
+    launch_site {
+      site_id
+      site_name
+      site_name_long
+    }
+    links {
+      flickr_images
+      video_link
+      wikipedia
+      article_link
+    }
+    mission_name
+    mission_id
+    rocket {
+      rocket_name
+      rocket_type
+    }
+  }
+}

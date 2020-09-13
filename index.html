@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpaceX Launches</title>
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="preload" as="style" href="/src/links.css">
+  <script type="module" src="/src/main.ts"></script>
+</head>
+<body>
+  <main>
+    <spacex-app>
+      <h1 slot="router-fallback">SpaceX</h1>
+      <spacex-latest-launch slot="router-fallback"></spacex-latest-launch>
+      <spacex-next-launch slot="router-fallback"></spacex-next-launch>
+      <spacex-launches slot="router-fallback"></spacex-launches>
+    </spacex-app>
+  </main>
+</body>
+</html>

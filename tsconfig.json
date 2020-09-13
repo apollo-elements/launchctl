@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "module": "ESNext",
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "noEmitOnError": false,
+    "sourceMap": true,
+    "moduleResolution": "Node",
+    "plugins": [
+      { "name": "typescript-lit-html-plugin" },
+      { "name": "ts-lit-plugin" }
+    ]
+  }
+}

@@ -1,0 +1,68 @@
+:host {
+  display: grid;
+  padding: 12px 32px;
+  width: calc(100% - 64px);
+}
+
+table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  width: 100%;
+  text-align: left;
+}
+
+tr {
+  height: 60px;
+  position: relative;
+}
+
+th,
+td {
+  padding: 12px;
+}
+
+th a[href],
+td a[href] {
+  position: unset;
+  margin-right: 4px;
+}
+
+td span {
+  z-index: 3;
+  position: relative;
+}
+
+th a[href]::after,
+td a[href]::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: var(--nnrg-table-link-width, 100%);
+  height: 100%;
+  z-index: 1;
+}
+
+th a[href]:hover::after,
+th a[href]:focus::after,
+td a[href]:hover::after,
+td a[href]:focus::after {
+  outline:
+    0.5em solid lightgreen;
+}
+
+tbody tr:hover,
+tbody tr:focus-within {
+  background: darkslategrey;
+}
+
+tr.loading:hover,
+tr.loading:focus-within {
+  background: initial;
+}
+
+tr.loading::after {
+  all: unset;
+}

@@ -1,0 +1,16 @@
+a[target="_blank"]::after {
+  content: '🌐'
+}
+
+a {
+  text-decoration: underline dashed 2px lightgreen;
+}
+
+a {
+  color: lightblue;
+}
+
+a:visited {
+  color: lightgrey;
+  text-decoration: underline dashed 2px lightgrey;
+}

@@ -1,0 +1,14 @@
+type RouteParams {
+  launchId: ID
+}
+
+type Route {
+  pathname: String
+  hash: String
+  params: RouteParams
+  parts: [String]
+}
+
+extend type Query {
+  route: Route
+}
