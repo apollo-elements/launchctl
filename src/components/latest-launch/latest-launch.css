@@ -1,5 +1,7 @@
-:host {
-  font-size: 2em;
+@media(min-width: 400px) {
+  :host {
+    font-size: 2em;
+  }
 }
 
 p {

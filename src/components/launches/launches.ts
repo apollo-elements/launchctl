@@ -65,6 +65,9 @@ export class SpacexLaunches extends TypePoliciesMixin(ApolloQuery)<Data, Variabl
     const launches = [...launchesPast, ...launchesUpcoming];
 
     return html`
+      <link rel="stylesheet" href="/src/links.css">
+      <link rel="stylesheet" href="/src/skeleton.css">
+
       <table>
         <thead>
           <tr>

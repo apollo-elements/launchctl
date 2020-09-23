@@ -1,9 +1,14 @@
-a[target="_blank"]::after {
-  content: '🌐'
+a[target="_blank"]::before {
+  content: '🌐';
+  margin-right: 4px;
+  text-decoration: none;
 }
 
 a {
-  text-decoration: underline dashed 2px lightgreen;
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-color: lightgreen;
+  text-decoration-thickness: 2px;
 }
 
 a {
@@ -12,5 +17,10 @@ a {
 
 a:visited {
   color: lightgrey;
-  text-decoration: underline dashed 2px lightgrey;
+  text-decoration-color: lightgrey;
+}
+
+a[href="null"],
+a[href="undefined"] {
+  display: none;
 }

@@ -8,11 +8,32 @@
 }
 
 article {
-  max-width: 800px;
+  width: 1000px;
+  border-radius: 4px;
+  background: hsla(0 0% 100% / 10%);
+  overflow: hidden;
+}
+
+header,
+#media {
+  padding: 6px 16px;
+}
+
+#media {
+  position: relative;
+  background: hsla(0 0% 100% / 10%);
+  box-shadow: inset 0 4px 4px -2px hsl(0 0% 0% / 50%);
+}
+
+@media(min-width: 1000px) {
+  article {
+    max-width: 800px;
+  }
 }
 
 youtube-video {
   place-self: center;
+  width: 100%;
 }
 
 dl {

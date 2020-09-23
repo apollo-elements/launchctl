@@ -1,14 +1,13 @@
 import { esbuildPlugin } from '@web/dev-server-esbuild';
 import { fromRollup } from '@web/dev-server-rollup';
-import rollupGraphql from '@kocal/rollup-plugin-graphql';
-import rollupCommonjs from '@rollup/plugin-commonjs';
 
-import rollupLitcss from 'rollup-plugin-lit-css';
+import _graphql from '@apollo-elements/rollup-plugin-graphql';
+import _commonjs from '@rollup/plugin-commonjs';
+import _litcss from 'rollup-plugin-lit-css';
 
-const commonjs = fromRollup(rollupCommonjs);
-
-const litcss = fromRollup(rollupLitcss);
-const graphql = fromRollup(rollupGraphql);
+const commonjs = fromRollup(_commonjs);
+const litcss = fromRollup(_litcss);
+const graphql = fromRollup(_graphql);
 
 export default {
   nodeResolve: true,

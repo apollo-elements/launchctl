@@ -17,6 +17,13 @@ const cache =
           },
         },
       },
+      Route: {
+        fields: {
+          previousPathname(next: string): string {
+            return next ?? '/';
+          },
+        },
+      },
     },
   });
 

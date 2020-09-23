@@ -2,7 +2,7 @@ import { makeVar } from '@apollo/client/core';
 import type { Route, RouteParams } from './schema';
 
 function makeRoute(location: Location): Route {
-  const { pathname, hash, search } = location;
+  const { pathname, hash } = location;
 
   const parts =
     pathname

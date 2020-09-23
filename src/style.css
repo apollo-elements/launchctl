@@ -1,3 +1,6 @@
+@import "/src/links.css";
+@import "/src/skeleton.css";
+
 @font-face {
   font-family: D-DIN-Medium;
   src: url(fonts/D-DIN.woff2) format("woff2"), url(fonts/D-DIN.woff) format("woff"), url(fonts/D-DIN.otf) format("opentype");
@@ -13,8 +16,6 @@
   font-weight: 400;
   font-display: block;
 }
-
-@import "/src/links.css";
 
 @font-face {
   font-family: D-DIN-Bold;

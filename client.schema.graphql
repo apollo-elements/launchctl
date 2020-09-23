@@ -6,6 +6,7 @@ type Route {
   pathname: String
   hash: String
   params: RouteParams
+  previousPathname: String
   parts: [String]
 }
 

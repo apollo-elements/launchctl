@@ -66,38 +66,43 @@ export class SpacexLaunches extends TypePoliciesMixin(ApolloQuery)<Data, Variabl
     const launch = this.data?.launch;
     const local = launch?.launch_date_local as Date;
     return html`
+      <link rel="stylesheet" href="/src/links.css">
+      <link rel="stylesheet" href="/src/skeleton.css">
+
       <article>
-        <h1 class="${classMap({ loading })}">${launch?.mission_name} Mission</h1>
-        <dl>
+        <header>
+          <h1 class="${classMap({ loading })}">${launch?.mission_name} Mission</h1>
+          <dl>
 
-          <dt>Launch Date</dt>
-          <dd class="${classMap({ loading })}">${local?.toLocaleDateString()}</dd>
+            <dt>Launch Date</dt>
+            <dd class="${classMap({ loading })}">${local?.toLocaleDateString()}</dd>
 
-          <dt>Launch Site</dt>
-          <dd class="${classMap({ loading })}">${launch?.launch_site?.site_name_long}</dd>
+            <dt>Launch Site</dt>
+            <dd class="${classMap({ loading })}">${launch?.launch_site?.site_name_long}</dd>
 
-          <dt>Rocket</dt>
-          <dd class="${classMap({ loading })}">${launch?.rocket?.rocket_name} ${launch?.rocket?.rocket_type}</dd>
+            <dt>Rocket</dt>
+            <dd class="${classMap({ loading })}">${launch?.rocket?.rocket_name} ${launch?.rocket?.rocket_type}</dd>
 
-        </dl>
+          </dl>
 
-        <p class="${classMap({ loading })}">${launch?.details}</p>
+          <p class="${classMap({ loading })}">${launch?.details}</p>
 
-        <a href="${launch?.links?.article_link}" target="_blank" rel="noopener noreferer">Media</a>
-        <a href="${launch?.links?.wikipedia}" target="_blank" rel="noopener noreferer">Wikipedia</a>
+          <a href="${launch?.links?.article_link}" target="_blank" rel="noopener noreferer">Media</a>
+          <a href="${launch?.links?.wikipedia}" target="_blank" rel="noopener noreferer">Wikipedia</a>
+        </header>
+
+        <youtube-video class="${classMap({ loading })}" controls src="${ifDefined(launch?.links?.video_link)}"></youtube-video>
+
+        <section id="media">
+          <h2 ?hidden="${!launch?.links?.flickr_images?.length}">Gallery</h2>
+          <masonry-layout class="${classMap({ loading: loading || !this.masonryDefined })}">
+            ${launch?.links?.flickr_images?.map((x, i) => html`
+              <img src="${x}" loading="lazy" class="flickr-pic" alt="Image ${i} of ${launch?.rocket?.rocket_type}"/>
+            `)}
+          </masonry-layout>
+        </section>
       </article>
 
-      <h2 ?hidden="${!launch?.links?.video_link}">Video</h2>
-
-      <youtube-video class="${classMap({ loading })}" controls src="${ifDefined(launch?.links?.video_link)}"></youtube-video>
-
-      <h2 ?hidden="${!launch?.links?.flickr_images?.length}">Gallery</h2>
-
-      <masonry-layout class="${classMap({ loading: loading || !this.masonryDefined })}">
-        ${launch?.links?.flickr_images?.map((x, i) => html`
-          <img src="${x}" loading="lazy" class="flickr-pic" alt="Image ${i} of ${launch?.rocket?.rocket_type}"/>
-        `)}
-      </masonry-layout>
     `;
   }
 }

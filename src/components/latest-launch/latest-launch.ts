@@ -1,10 +1,11 @@
-/* eslint-disable camelcase */
 import {
   ApolloQuery,
   TemplateResult,
   customElement,
   html,
 } from '@apollo-elements/lit-apollo';
+
+import { classMap } from 'lit-html/directives/class-map';
 
 import LatestLaunchQuery from './LatestLaunch.query.graphql';
 
@@ -34,8 +35,9 @@ export class LatestLaunch extends ApolloQuery<Data, Variables> {
     const missionName =
       this.data?.launchLatest.mission_name;
 
+    const { loading } = this;
     return html`
-      <p>
+      <p class="${classMap({ loading })}">
         The last launch was the${this.loading ? '...' : html`
         <strong>${rocketName}</strong>, which took off from
         <strong>${siteName}</strong> on

@@ -1,7 +1,12 @@
 :host {
   display: grid;
-  padding: 12px 32px;
-  width: calc(100% - 64px);
+}
+
+@media(min-width: 400px) {
+  :host {
+    padding: 12px 32px;
+    width: calc(100% - 64px);
+  }
 }
 
 * {
@@ -31,6 +36,7 @@ td a[href] {
   margin-right: 4px;
 }
 
+th span,
 td span {
   z-index: 3;
   position: relative;

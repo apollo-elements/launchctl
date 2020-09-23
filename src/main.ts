@@ -15,6 +15,9 @@ window.__APOLLO_CLIENT__ =
 
 installRouter(updateRoute);
 
+customElements.whenDefined('spacex-app')
+  .then(() => document.querySelector('h1').classList.remove('loading'));
+
 declare global {
   interface Window {
     __APOLLO_CLIENT__?: ApolloClient<NormalizedCacheObject>;
