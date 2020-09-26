@@ -31,7 +31,7 @@
     "@graphql-codegen/cli": "^1.17.8",
     "@graphql-codegen/typescript": "^1.17.9",
     "@graphql-codegen/typescript-operations": "^1.17.8",
-    "@open-wc/rollup-plugin-html": "^1.2.3",
+    "@open-wc/rollup-plugin-html": "^1.2.4",
     "@pwrs/eslint-config": "0.0.10",
     "@rollup/plugin-commonjs": "^15.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
@@ -55,7 +55,7 @@
     "web-component-analyzer": "^1.1.6"
   },
   "dependencies": {
-    "@apollo-elements/lit-apollo": "^3.0.0-alpha.8",
+    "@apollo-elements/lit-apollo": "^3.0.0",
     "@appnest/masonry-layout": "^2.0.8",
     "pwa-helpers": "^0.9.1",
     "resize-observer-polyfill": "^1.5.1",
