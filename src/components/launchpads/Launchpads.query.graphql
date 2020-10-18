@@ -1,0 +1,26 @@
+query LaunchpadsQuery {
+  launchpads {
+    id
+    details
+    name
+    wikipedia
+    location {
+      latitude
+      longitude
+      name
+      region
+    }
+  }
+  landpads {
+    id
+    details
+    wikipedia
+    name: full_name
+    location {
+      latitude
+      longitude
+      name
+      region
+    }
+  }
+}

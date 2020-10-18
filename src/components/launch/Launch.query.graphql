@@ -19,8 +19,11 @@ query LaunchQuery($launchId: ID!) {
     mission_name
     mission_id
     rocket {
-      rocket_name
-      rocket_type
+      rocket {
+        id
+        name
+        type
+      }
     }
   }
 }

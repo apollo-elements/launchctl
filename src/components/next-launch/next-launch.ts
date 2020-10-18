@@ -25,7 +25,7 @@ export class NextLaunch extends ApolloQuery<Data, Variables> {
 
   render(): TemplateResult {
     const rocketName =
-      this.data?.launchNext.rocket.rocket_name;
+      this.data?.launchNext.rocket.rocket.name;
 
     const siteName =
       this.data?.launchNext.launch_site.site_name_long;

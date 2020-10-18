@@ -32,6 +32,7 @@ export class SpacexApp extends TypePoliciesMixin(ApolloQuery)<Data, Variables> {
       <header>
         <a href="${backURL}" ?hidden="${!backURL}">Back</a>
       </header>
+
       <slot name="router-outlet">
         ${this.renderRoute()}
       </slot>
@@ -42,6 +43,7 @@ export class SpacexApp extends TypePoliciesMixin(ApolloQuery)<Data, Variables> {
     const [parent] = this.data?.route.parts ?? [];
     switch (parent) {
       case 'launches': return html`<spacex-launch></spacex-launch>`;
+      case 'launchpads': return html`<spacex-launchpads></spacex-launchpads>`;
       default: return html`<slot name="router-fallback"></slot>`;
     }
   }

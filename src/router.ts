@@ -54,5 +54,6 @@ window.addEventListener(RouteEvent.type, function onRouteChanged({ detail: route
   const [parent] = route.parts;
   switch (parent) {
     case 'launches': return void import('./components/launch');
+    case 'launchpads': return void import('./components/launchpads');
   }
 });

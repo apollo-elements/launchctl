@@ -1,4 +1,11 @@
-import { ApolloQuery, customElement, html, query, TemplateResult } from '@apollo-elements/lit-apollo';
+import {
+  ApolloQuery,
+  customElement,
+  html,
+  query,
+  TemplateResult,
+} from '@apollo-elements/lit-apollo';
+
 import { classMap } from 'lit-html/directives/class-map';
 
 import { TypePoliciesMixin } from '@apollo-elements/mixins/type-policies-mixin';
@@ -93,7 +100,7 @@ export class SpacexLaunches extends TypePoliciesMixin(ApolloQuery)<Data, Variabl
         </th>
 
         <td class="${classMap({ loading })}">
-          <span>${launch?.rocket?.rocket_name}</span>
+          <span>${launch?.rocket?.rocket.name}</span>
         </td>
 
         <td class="${classMap({ loading })}">

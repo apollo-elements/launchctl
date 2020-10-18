@@ -29,7 +29,7 @@ export class LatestLaunch extends LitElement {
 
   render(): TemplateResult {
     return html`
-      <time>${this.remaining}</time>
+      <time datetime="${this.datetime}">${this.remaining}</time>
     `;
   }
 

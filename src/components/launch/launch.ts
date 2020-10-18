@@ -81,7 +81,7 @@ export class SpacexLaunches extends TypePoliciesMixin(ApolloQuery)<Data, Variabl
             <dd class="${classMap({ loading })}">${launch?.launch_site?.site_name_long}</dd>
 
             <dt>Rocket</dt>
-            <dd class="${classMap({ loading })}">${launch?.rocket?.rocket_name} ${launch?.rocket?.rocket_type}</dd>
+            <dd class="${classMap({ loading })}">${launch?.rocket?.rocket.name} ${launch?.rocket?.rocket.type}</dd>
 
           </dl>
 
@@ -96,8 +96,8 @@ export class SpacexLaunches extends TypePoliciesMixin(ApolloQuery)<Data, Variabl
         <section id="media">
           <h2 ?hidden="${!launch?.links?.flickr_images?.length}">Gallery</h2>
           <masonry-layout class="${classMap({ loading: loading || !this.masonryDefined })}">
-            ${launch?.links?.flickr_images?.map((x, i) => html`
-              <img src="${x}" loading="lazy" class="flickr-pic" alt="Image ${i} of ${launch?.rocket?.rocket_type}"/>
+            ${launch?.links?.flickr_images?.map((x, i, a) => html`
+              <img src="${x}" loading="lazy" class="flickr-pic" alt="${launch?.rocket?.rocket.type} (${i} of ${a.length})"/>
             `)}
           </masonry-layout>
         </section>

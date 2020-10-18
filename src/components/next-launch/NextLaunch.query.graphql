@@ -1,7 +1,7 @@
 query NextLaunchQuery {
   launchNext {
     id
-    rocket { rocket_name rocket_type }
+    rocket { rocket { id name type } }
     launch_year
     launch_site { site_name_long }
     launch_success

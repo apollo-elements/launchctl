@@ -24,7 +24,7 @@ export class LatestLaunch extends ApolloQuery<Data, Variables> {
 
   render(): TemplateResult {
     const rocketName =
-      this.data?.launchLatest.rocket.rocket_name;
+      this.data?.launchLatest.rocket.rocket.name;
 
     const siteName =
       this.data?.launchLatest.launch_site.site_name_long;

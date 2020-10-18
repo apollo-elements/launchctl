@@ -5,7 +5,10 @@ query Launches {
     mission_name
     launch_date_local
     rocket {
-      rocket_name
+      rocket {
+        id
+        name
+      }
     }
   }
 
@@ -15,7 +18,10 @@ query Launches {
     mission_name
     launch_date_local
     rocket {
-      rocket_name
+      rocket {
+        id
+        name
+      }
     }
   }
 }
