@@ -65,6 +65,9 @@ export class SpacexLaunches extends TypePoliciesMixin(ApolloQuery)<Data, Variabl
     const { loading } = this;
     const launch = this.data?.launch;
     const local = launch?.launch_date_local as Date;
+    const missionPatch = launch?.links?.mission_patch;
+    const videoLink = launch?.links?.video_link;
+    const images = launch?.links?.flickr_images;
     return html`
       <link rel="stylesheet" href="/src/links.css">
       <link rel="stylesheet" href="/src/skeleton.css">
@@ -72,6 +75,7 @@ export class SpacexLaunches extends TypePoliciesMixin(ApolloQuery)<Data, Variabl
       <article>
         <header>
           <h1 class="${classMap({ loading })}">${launch?.mission_name} Mission</h1>
+          <img role="presentation" src="${missionPatch}" ?hidden="${!missionPatch}"/>
           <dl>
 
             <dt>Launch Date</dt>
@@ -91,12 +95,14 @@ export class SpacexLaunches extends TypePoliciesMixin(ApolloQuery)<Data, Variabl
           <a href="${launch?.links?.wikipedia}" target="_blank" rel="noopener noreferer">Wikipedia</a>
         </header>
 
-        <youtube-video class="${classMap({ loading })}" controls src="${ifDefined(launch?.links?.video_link)}"></youtube-video>
+      </article>
+      <article class="${classMap({ loading })}" ?hidden="${!loading && (!videoLink && !images.length)}">
+        <youtube-video controls src="${ifDefined(videoLink)}"></youtube-video>
 
         <section id="media">
-          <h2 ?hidden="${!launch?.links?.flickr_images?.length}">Gallery</h2>
+          <h2 ?hidden="${!images?.length}">Gallery</h2>
           <masonry-layout class="${classMap({ loading: loading || !this.masonryDefined })}">
-            ${launch?.links?.flickr_images?.map((x, i, a) => html`
+            ${images?.map?.((x, i, a) => html`
               <img src="${x}" loading="lazy" class="flickr-pic" alt="${launch?.rocket?.rocket.type} (${i} of ${a.length})"/>
             `)}
           </masonry-layout>

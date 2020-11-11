@@ -1,11 +1,16 @@
 import type { Route } from './schema';
-import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client/core';
+import { ApolloClient, InMemoryCache, ApolloLink, HttpLink } from '@apollo/client/core';
 import { routeVar } from './router';
+import { hasAllVariables } from '@apollo-elements/lib/has-all-variables';
 
 const uri =
   'https://api.spacex.land/graphql';
 
-export const link = new HttpLink({ uri });
+export const link = ApolloLink.from([
+  new ApolloLink((operation, forward) =>
+    hasAllVariables(operation) && forward(operation)),
+  new HttpLink({ uri }),
+]);
 
 const cache =
   new InMemoryCache({

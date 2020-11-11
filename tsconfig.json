@@ -3,6 +3,7 @@
     "target": "ES2019",
     "module": "ESNext",
     "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
     "experimentalDecorators": true,
     "noEmitOnError": false,
     "sourceMap": true,

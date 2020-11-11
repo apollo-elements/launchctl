@@ -3,7 +3,8 @@
   display: grid;
   gap: 16px;
   grid-template-rows: min-content min-content;
-  place-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(800px, 1fr));
+  align-items: start;
   justify-content: center;
 }
 
@@ -17,6 +18,13 @@ article {
 header,
 #media {
   padding: 6px 16px;
+}
+
+header img {
+  display: block;
+  width: 90%;
+  height: auto;
+  margin: 0 auto;
 }
 
 #media {

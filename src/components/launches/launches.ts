@@ -92,10 +92,15 @@ export class SpacexLaunches extends TypePoliciesMixin(ApolloQuery)<Data, Variabl
 
   launchTemplate(launch: Launch): TemplateResult {
     const { loading = false } = launch;
+    const missionPatchSmall = launch?.links?.mission_patch_small;
     return html`
       <tr class="${classMap({ loading })}">
         <th class="${classMap({ loading })}">
-          <a href="/launches/${launch?.id}">🚀</a>
+          <a href="/launches/${launch?.id}">
+            <img alt="mission patch" src="${missionPatchSmall}" ?hidden="${!missionPatchSmall}"/>
+            <span ?hidden="${!!missionPatchSmall}">🚀</span>
+          </a>
+
           <span>${launch?.mission_name}</span>
         </th>
 

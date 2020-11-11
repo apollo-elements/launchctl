@@ -16,7 +16,9 @@ window.__APOLLO_CLIENT__ =
 installRouter(updateRoute);
 
 customElements.whenDefined('spacex-app')
-  .then(() => document.querySelector('h1').classList.remove('loading'));
+  .then(() =>
+    document.querySelectorAll('[slot="router-fallback"]').forEach(el =>
+      el.classList.remove('loading')));
 
 declare global {
   interface Window {

@@ -15,6 +15,7 @@ query LaunchQuery($launchId: ID!) {
       video_link
       wikipedia
       article_link
+      mission_patch
     }
     mission_name
     mission_id

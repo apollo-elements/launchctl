@@ -34,12 +34,25 @@ th a[href],
 td a[href] {
   position: unset;
   margin-right: 4px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+th a img,
+td a img,
+th a span,
+td a span {
+  display: inline-block;
+  text-align: center;
+  width: 40px;
+  height: auto;
 }
 
 th span,
 td span {
   z-index: 3;
   position: relative;
+  vertical-align: middle;
 }
 
 th a[href]::after,

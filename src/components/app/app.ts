@@ -29,9 +29,9 @@ export class SpacexApp extends TypePoliciesMixin(ApolloQuery)<Data, Variables> {
       <link rel="stylesheet" href="/src/links.css">
       <link rel="stylesheet" href="/src/skeleton.css">
 
-      <header>
+      <nav>
         <a href="${backURL}" ?hidden="${!backURL}">Back</a>
-      </header>
+      </nav>
 
       <slot name="router-outlet">
         ${this.renderRoute()}
