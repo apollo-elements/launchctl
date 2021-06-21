@@ -30,6 +30,7 @@ extensions:
         presetConfig:
           baseTypesPath: schema.ts
           extension: .ts
+          typesSuffix: ''
         schema: client.schema.graphql
         plugins:
           - typescript-operations

@@ -1,16 +1,10 @@
-import {
-  LitElement,
-  TemplateResult,
-  customElement,
-  html,
-  property,
-  internalProperty,
-  PropertyValues,
-} from 'lit-element';
+import { LitElement, TemplateResult, html, PropertyValues } from 'lit';
+
+import { customElement, property, state } from 'lit/decorators.js';
 
 import style from './countdown-timer.css';
 
-import bound from 'bind-decorator';
+import { bound } from '@apollo-elements/core/lib/bound';
 
 const SECOND = 1000;
 const MINUTE = SECOND * 60;
@@ -23,9 +17,9 @@ export class LatestLaunch extends LitElement {
 
   @property() datetime: string;
 
-  @internalProperty() date: Date;
+  @state() date: Date;
 
-  @internalProperty() remaining: string;
+  @state() remaining: string;
 
   render(): TemplateResult {
     return html`

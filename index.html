@@ -10,6 +10,10 @@
   <link rel="preload" as="style" href="/src/links.css">
   <link rel="preload" as="style" href="/src/skeleton.css">
   <link rel="preconnect" href="https://api.spacex.land">
+  <script>
+  // @ts-expect-error: ugh
+  if (!window.process) window.process = { env: '' };
+  </script>
   <script type="module" src="/src/main.ts"></script>
 </head>
 <body>

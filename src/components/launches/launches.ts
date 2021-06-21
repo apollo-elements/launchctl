@@ -1,65 +1,41 @@
-import {
-  ApolloQuery,
-  customElement,
-  html,
-  query,
-  TemplateResult,
-} from '@apollo-elements/lit-apollo';
-
+import { LitElement, html, TemplateResult } from 'lit';
+import { customElement, query } from 'lit/decorators.js';
+import { ApolloQueryController } from '@apollo-elements/core';
 import { classMap } from 'lit-html/directives/class-map';
-
-import { TypePoliciesMixin } from '@apollo-elements/mixins/type-policies-mixin';
 
 import ResizeObserver from 'resize-observer-polyfill';
 
-import type {
-  LaunchesQueryData as Data,
-  LaunchesQueryVariables as Variables,
-  Launch as _Launch,
-} from '../../schema';
-
-import LaunchesQuery from './Launches.query.graphql';
+import { LaunchesDocument } from './Launches.query';
+import { Launch } from '../../schema';
+import { bound } from '@apollo-elements/core/lib/bound';
 
 import shared from '../shared.css';
 import style from './launches.css';
 
-type Launch = _Launch & { loading?: boolean };
-
 @customElement('spacex-launches')
-export class SpacexLaunches extends TypePoliciesMixin(ApolloQuery)<Data, Variables> {
+export class SpacexLaunches extends LitElement {
   static readonly is = 'spacex-launches'
 
   static readonly styles = [shared, style];
 
-  query = LaunchesQuery;
+  query = new ApolloQueryController(this, LaunchesDocument);
 
-  typePolicies = {
-    Launch: {
-      fields: {
-        launch_date_local(next: string): Date {
-          return new Date(next);
-        },
-      },
-    },
-  }
+  private ro = new ResizeObserver(this.onResize);
 
   @query('table') table: HTMLTableElement;
 
-  private ro: ResizeObserver;
-
   constructor() {
     super();
-    this.ro = new ResizeObserver(this.onResize.bind(this));
     this.ro.observe(this);
   }
 
-  onResize(entries: ResizeObserverEntry[]): void {
+  @bound onResize(entries: ResizeObserverEntry[]): void {
     const [{ contentRect: { width } }] = entries;
     this.table.style.setProperty('--data-table-link-width', `${width}px`);
   }
 
   render(): TemplateResult {
-    const { loading, data } = this;
+    const { loading, data } = this.query;
 
     const loadingLaunches = (Array.from({ length: 10 }, () => ({ loading })) as Launch[]);
 
@@ -84,14 +60,14 @@ export class SpacexLaunches extends TypePoliciesMixin(ApolloQuery)<Data, Variabl
           </tr>
         </thead>
         <tbody>
-          ${launches.map(this.launchTemplate)}
+          ${launches.map(this.launchTemplate, this)}
         </tbody>
       </table>
     `;
   }
 
   launchTemplate(launch: Launch): TemplateResult {
-    const { loading = false } = launch;
+    const { loading = false } = this.query;
     const missionPatchSmall = launch?.links?.mission_patch_small;
     return html`
       <tr class="${classMap({ loading })}">

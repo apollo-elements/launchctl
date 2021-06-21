@@ -1,15 +1,6 @@
-import {
-  ApolloQuery,
-  html,
-  customElement,
-  TemplateResult,
-  property,
-} from '@apollo-elements/lit-apollo';
-
-import type {
-  LaunchpadsQueryData as Data,
-  LaunchpadsQueryVariables as Variables,
-} from '../../schema';
+import { LitElement, html, TemplateResult } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { ApolloQueryController } from '@apollo-elements/core';
 
 import 'leaflet-element';
 import '@power-elements/card';
@@ -17,25 +8,26 @@ import '@power-elements/card';
 import shared from '../shared.css';
 import style from './launchpads.css';
 
-import LaunchpadsQuery from './Launchpads.query.graphql';
+import { LaunchpadsQueryDocument } from './Launchpads.query';
+import { Landpad, Launchpad } from '../../schema';
 
 const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
 @customElement('spacex-launchpads')
-export class Launchpads extends ApolloQuery<Data, Variables> {
+export class Launchpads extends LitElement {
   static readonly is = 'spacex-launchpads';
 
   static readonly styles = [shared, style];
 
-  query = LaunchpadsQuery;
+  query = new ApolloQueryController(this, LaunchpadsQueryDocument);
 
-  @property({ attribute: false }) selected: Data['landpads' | 'launchpads'][number];
+  @property({ attribute: false }) selected: Launchpad|Landpad;
 
   render(): TemplateResult {
-    const launchpads = this.data?.launchpads ?? [];
-    const landpads = this.data?.landpads ?? [];
+    const launchpads = this.query.data?.launchpads ?? [];
+    const landpads = this.query.data?.landpads ?? [];
     return html`
-      <leaflet-map ?fit-to-markers="${!!this.data}">
+      <leaflet-map ?fit-to-markers="${!!this.query.data}">
         <leaflet-tilelayer
             url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
             max-zoom="19"
@@ -63,7 +55,7 @@ export class Launchpads extends ApolloQuery<Data, Variables> {
       </leaflet-map>
 
       <p-card>
-        <h2 slot="heading">${this.selected?.name ?? ''}</h2>
+        <h2 slot="heading">${(this.selected as Launchpad)?.name ?? ''}</h2>
         <p>${this.selected?.details ?? ''}</p>
         <a href="${this.selected?.wikipedia ?? '#'}" target="_blank" rel="noopener noreferrer">Read More</a>
       </p-card>
@@ -74,8 +66,8 @@ export class Launchpads extends ApolloQuery<Data, Variables> {
     event.preventDefault();
     const id = event.target.dataset.id ?? null;
     this.selected =
-      this.data.landpads.find(x => x.id === id) ??
-      this.data.launchpads.find(x => x.id === id) ??
+      this.query.data.landpads.find(x => x.id === id) ??
+      this.query.data.launchpads.find(x => x.id === id) ??
       null;
   }
 }

@@ -1,30 +1,21 @@
-import {
-  ApolloQuery,
-  customElement,
-  html,
-  TemplateResult,
-} from '@apollo-elements/lit-apollo';
+import { LitElement, html, TemplateResult } from 'lit';
+import { customElement } from 'lit/decorators.js';
 
-import { TypePoliciesMixin } from '@apollo-elements/mixins/type-policies-mixin';
+import { ApolloQueryController } from '@apollo-elements/core';
 
-import type {
-  AppQueryData as Data,
-  AppQueryVariables as Variables,
-} from '../../schema';
-
-import AppQuery from './App.query.graphql';
+import { AppQueryDocument } from './App.query';
 
 import shared from '../shared.css';
 import style from './app.css';
 
 @customElement('spacex-app')
-export class SpacexApp extends TypePoliciesMixin(ApolloQuery)<Data, Variables> {
+export class SpacexApp extends LitElement {
   static readonly styles = [shared, style];
 
-  query = AppQuery;
+  query = new ApolloQueryController(this, AppQueryDocument);
 
   render(): TemplateResult {
-    const backURL = this.data?.route?.pathname?.includes('/launches/') ? '/' : '';
+    const backURL = this.query.data?.route?.pathname?.includes('/launches/') ? '/' : '';
     return html`
       <link rel="stylesheet" href="/src/links.css">
       <link rel="stylesheet" href="/src/skeleton.css">
@@ -40,7 +31,7 @@ export class SpacexApp extends TypePoliciesMixin(ApolloQuery)<Data, Variables> {
   }
 
   renderRoute(): string|TemplateResult {
-    const [parent] = this.data?.route.parts ?? [];
+    const [parent] = this.query.data?.route.parts ?? [];
     switch (parent) {
       case 'launches': return html`<spacex-launch></spacex-launch>`;
       case 'launchpads': return html`<spacex-launchpads></spacex-launchpads>`;

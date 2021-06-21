@@ -15,6 +15,13 @@ export const link = ApolloLink.from([
 const cache =
   new InMemoryCache({
     typePolicies: {
+      Launch: {
+        fields: {
+          launch_date_local(next: string): Date {
+            return new Date(next);
+          },
+        },
+      },
       Query: {
         fields: {
           route(): Route {

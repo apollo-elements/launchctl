@@ -1,47 +1,24 @@
-import {
-  ApolloQuery,
-  customElement,
-  html,
-  internalProperty,
-  TemplateResult,
-} from '@apollo-elements/lit-apollo';
-
-import { TypePoliciesMixin } from '@apollo-elements/mixins/type-policies-mixin';
-
+import { LitElement, html, TemplateResult } from 'lit';
+import { ApolloQueryController } from '@apollo-elements/core';
+import { customElement, state } from 'lit/decorators.js';
 import { routeVar } from '../../router';
-
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
-
-import type {
-  LaunchQueryData as Data,
-  LaunchQueryVariables as Variables,
-} from '../../schema';
 
 import shared from '../shared.css';
 import style from './launch.css';
 
-import LaunchQuery from './Launch.query.graphql';
+import { LaunchQueryDocument } from './Launch.query';
 
 @customElement('spacex-launch')
-export class SpacexLaunches extends TypePoliciesMixin(ApolloQuery)<Data, Variables> {
+export class SpacexLaunches extends LitElement {
   static readonly is = 'spacex-launch'
 
   static readonly styles = [shared, style];
 
-  @internalProperty() masonryDefined = false;
+  @state() masonryDefined = false;
 
-  query = LaunchQuery;
-
-  typePolicies = {
-    Launch: {
-      fields: {
-        launch_date_local(next: string): Date {
-          return new Date(next);
-        },
-      },
-    },
-  }
+  query = new ApolloQueryController(this, LaunchQueryDocument);
 
   /**
    * Ensure that query does not go over the wire unless user is on a `/launches/:launchId` page.
@@ -52,9 +29,9 @@ export class SpacexLaunches extends TypePoliciesMixin(ApolloQuery)<Data, Variabl
   }
 
   async updated(): Promise<void> {
-    if (this.data?.launch?.links?.video_link)
+    if (this.query.data?.launch?.links?.video_link)
       import('youtube-video-element');
-    if (this.data?.launch?.links?.flickr_images?.length) {
+    if (this.query.data?.launch?.links?.flickr_images?.length) {
       import('@appnest/masonry-layout');
       await customElements.whenDefined('masonry-layout');
       this.masonryDefined = true;
@@ -62,8 +39,8 @@ export class SpacexLaunches extends TypePoliciesMixin(ApolloQuery)<Data, Variabl
   }
 
   render(): TemplateResult {
-    const { loading } = this;
-    const launch = this.data?.launch;
+    const { loading } = this.query;
+    const launch = this.query.data?.launch;
     const local = launch?.launch_date_local as Date;
     const missionPatch = launch?.links?.mission_patch;
     const videoLink = launch?.links?.video_link;

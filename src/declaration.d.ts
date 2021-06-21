@@ -1,11 +1,5 @@
-declare module '*.graphql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export default defaultDocument;
-}
-
 declare module '*.css' {
-  import { CSSResult } from 'lit-element';
+  import { CSSResult } from 'lit';
   const css: CSSResult;
   export default css;
 }

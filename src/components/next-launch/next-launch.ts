@@ -1,37 +1,28 @@
-/* eslint-disable camelcase */
-import {
-  ApolloQuery,
-  TemplateResult,
-  customElement,
-  html,
-} from '@apollo-elements/lit-apollo';
+import { LitElement, html, TemplateResult } from 'lit';
+import { customElement } from 'lit/decorators.js';
+import { ApolloQueryController } from '@apollo-elements/core';
 
 import '../countdown-timer';
 
-import NextLaunchQuery from './NextLaunch.query.graphql';
-
-import {
-  NextLaunchQueryData as Data,
-  NextLaunchQueryVariables as Variables,
-} from '../../schema';
+import { NextLaunchQueryDocument } from './NextLaunch.query';
 
 import style from '../latest-launch/latest-launch.css';
 
 @customElement('spacex-next-launch')
-export class NextLaunch extends ApolloQuery<Data, Variables> {
+export class NextLaunch extends LitElement {
   static readonly styles = [style];
 
-  query = NextLaunchQuery;
+  query = new ApolloQueryController(this, NextLaunchQueryDocument);
 
   render(): TemplateResult {
     const rocketName =
-      this.data?.launchNext.rocket.rocket.name;
+      this.query.data?.launchNext.rocket.rocket.name;
 
     const siteName =
-      this.data?.launchNext.launch_site.site_name_long;
+      this.query.data?.launchNext.launch_site.site_name_long;
 
     const launchTime =
-      this.data?.launchNext.launch_date_utc;
+      this.query.data?.launchNext.launch_date_utc;
 
     const launchDate =
       launchTime && new Date(launchTime);
@@ -43,7 +34,7 @@ export class NextLaunch extends ApolloQuery<Data, Variables> {
         The next launch
         ${past ? 'will be announced soon' : html`
         will be the
-        ${this.loading ? '...' : html`
+        ${this.query.loading ? '...' : html`
         <strong>${rocketName}</strong> from
         <strong>${siteName}</strong> in
         <strong>
