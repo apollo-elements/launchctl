@@ -1,3 +1,6 @@
 node_modules
 build
 src/schema.ts
+src/**/*.query.ts
+src/**/*.mutation.ts
+src/**/*.subscription.ts

@@ -1,4 +1,13 @@
-schema: https://api.spacex.land/graphql
+schema:
+  - https://api.spacex.land/graphql
+  - src/client.schema.graphql
+
+
+documents:
+  - src/**/*.fragment.graphql
+  - src/**/*.mutation.graphql
+  - src/**/*.query.graphql
+  - src/**/*.subscription.graphql
 
 extensions:
   codegen:
@@ -15,13 +24,13 @@ extensions:
 
     generates:
       src/schema.ts:
+        - typescript
+      src/:
+        preset: near-operation-file
+        presetConfig:
+          baseTypesPath: schema.ts
+          extension: .ts
         schema: client.schema.graphql
         plugins:
-          - typescript
           - typescript-operations
-
-        documents:
-          - src/**/*.fragment.graphql
-          - src/**/*.mutation.graphql
-          - src/**/*.query.graphql
-          - src/**/*.subscription.graphql
+          - typed-document-node
